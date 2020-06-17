@@ -1,6 +1,14 @@
 import React from 'react';
 import './App.css';
 
+import {
+  Route,
+  Switch,
+  withRouter
+} from "react-router-dom";
+
+import About from './About/About';
+import Contacts from './Contacts/Contacts';
 import Header from './Header/Header';
 import Rate from './Rate/Rate';
 import Footer from './Footer/Footer';
@@ -11,12 +19,17 @@ class App extends React.Component {
   // }
 
   render() {
+    const { history } = this.props
     return (
       <div>
         <Header />
         <div className="container">
           <main>
-            <Rate />
+            <Switch>
+              <Route history={history} exact path='/' component={Rate} />;
+              <Route history={history} exact path='/about' component={About} />;
+              <Route history={history} exact path='/contacts' component={Contacts} />;
+            </Switch>
           </main>
         </div>
 
@@ -33,4 +46,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);
